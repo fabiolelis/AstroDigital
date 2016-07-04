@@ -19,15 +19,20 @@ import org.json.JSONObject;
 public class GetResults implements Runnable {
 
 	private volatile List<String> scenesIDs = new ArrayList<String>();
+	private volatile String task_id;
+	
 	
 	public List<String> getScenesIds(){
 		return scenesIDs;
+	}
+	public void setTask_id(String task_id){
+		this.task_id = task_id;
 	}
 	
     public void run() {
     	CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet("https://api.astrodigital.com/v2.0/results?task_id=8530");
+            HttpGet httpget = new HttpGet("https://api.astrodigital.com/v2.0/results?task_id=" + task_id);
             httpget.addHeader("Authorization", "Token 51fcf1fd2c063aaf3ac22029adf505c2d56e681c");
             // Create a custom response handler
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
@@ -48,7 +53,7 @@ public class GetResults implements Runnable {
                     		result.append(line);
                     	}
                         
-                    	//System.out.println("result: " + result);
+                    	System.out.println("result: " + result);
                     	JSONObject obj = new JSONObject(result.toString());
                     	JSONArray arr = obj.getJSONArray("results");
                     	String scenesIDStr = "";

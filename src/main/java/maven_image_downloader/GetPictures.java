@@ -30,6 +30,7 @@ public class GetPictures implements Runnable {
 
 	private volatile List<String> scenesIDs = new ArrayList<String>();
 	private volatile List<String> pics = new ArrayList<String>();
+	private volatile String task_id;
 	
 	public void setScenesIds(List<String> scenesIDs){
 		this.scenesIDs = scenesIDs;
@@ -37,6 +38,9 @@ public class GetPictures implements Runnable {
 	
 	public List<String> getPics(){
 		return pics;
+	}
+	public void setTaskId(String task_id){
+		this.task_id = task_id;
 	}
 	
 	
@@ -90,9 +94,13 @@ public class GetPictures implements Runnable {
 	                    	in.close();
 	                    	byte[] bynary = out.toByteArray();
 	                    	
-	                    	File f = new File("/Users/fabiolelis/Desktop/space_images/"+sceneID+".png");
+	                    	File fdir = new File("/Users/fabiolelis/Desktop/space_images/"+task_id);
+                    		if(!fdir.exists() && !fdir.isDirectory()) {
+                    			fdir.mkdir();
+                    		}
+	                    	File f = new File("/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+sceneID+".png");
 	                    	if(!f.exists() && !f.isDirectory()) { 
-	                    		FileOutputStream fos = new FileOutputStream("/Users/fabiolelis/Desktop/space_images/"+sceneID+".png");
+	                    		FileOutputStream fos = new FileOutputStream("/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+sceneID+".png");
 		                    	fos.write(bynary);
 		                    	fos.close();
 		                    	System.out.println("Saved " + sceneID);
