@@ -19,11 +19,15 @@ import org.json.JSONObject;
 public class GetResults implements Runnable {
 
 	private volatile List<String> scenesIDs = new ArrayList<String>();
+	private volatile List<String> rawsUrls = new ArrayList<String>();
 	private volatile String task_id;
 	
 	
 	public List<String> getScenesIds(){
 		return scenesIDs;
+	}
+	public List<String> getRawsUrls(){
+		return rawsUrls;
 	}
 	public void setTask_id(String task_id){
 		this.task_id = task_id;
@@ -62,12 +66,20 @@ public class GetResults implements Runnable {
                     	{
                     	    String resultStatus = arr.getJSONObject(i).getString("status");
                     	    if(resultStatus.equals("COMPLETED")){
-                        	    String scene = arr.getJSONObject(i).getJSONObject("value").getJSONObject("meta").getString("scene_id");
-                        	    if(scene != null){
-                        	    	scenesIDs.add(scene);
-                        	    	scenesIDStr += scene + "\n";
-                        	    }
-                        	  //  System.out.println(scene);
+                    	    	if(arr.getJSONObject(i) != null && arr.getJSONObject(i).getJSONObject("value") != null && arr.getJSONObject(i).getJSONObject("value").getJSONObject("meta") != null){
+                    	    		String scene = arr.getJSONObject(i).getJSONObject("value").getJSONObject("meta").getString("scene_id");
+                            	    if(scene != null){
+                            	    	scenesIDs.add(scene);
+                            	    	scenesIDStr += scene + "\n";
+                            	    }
+                            	  //  System.out.println(scene);
+                    	    	}
+                    	    	else if(arr.getJSONObject(i).getJSONObject("value") != null){
+                    	    		String raw_url = arr.getJSONObject(i).getJSONObject("value").getString("raw_image_url");
+                    	    		rawsUrls.add(raw_url); 
+
+                    	    	}
+                        	    
                     	    }
                     	    
                     	}

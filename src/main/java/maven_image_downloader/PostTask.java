@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,8 +15,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.geotools.feature.simple.SimpleFeatureBuilder;
+import org.geotools.geojson.feature.FeatureJSON;
+import org.geotools.geojson.geom.GeometryJSON;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.opengis.feature.Feature;
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+
+
+
 
 
 public class PostTask implements Runnable {
@@ -38,8 +49,7 @@ public class PostTask implements Runnable {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		
 		try {
-			
-            //BufferedReader br = new BufferedReader(new FileReader("/Users/fabiolelis/Desktop/Space/geometry.json"));
+			/*
 			BufferedReader br = new BufferedReader(new FileReader(filepath));
         	StringBuffer result = new StringBuffer();
         	String line = "";
@@ -49,26 +59,31 @@ public class PostTask implements Runnable {
             
         	System.out.println("result: " + result);
         	JSONObject polygon = new JSONObject(result.toString());
-        	/*
+        	*/
 			GeometryJSON g = new GeometryJSON();			
-			Geometry geometry = g.read(jsonObject.toString());
-			Coordinate[] coords = geometry.getCoordinates();
-	        String strCoords = coords[0].toString();
-	        */
-        	
-        	JSONArray coords = polygon.getJSONArray("coordinates");
-	        String strCoords = coords.toString();
+			Geometry geom = g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
 			
+		    System.out.println(geom);
+
+		    StringWriter sw = new StringWriter();
+		    try {
+		        g.write(geom, sw);
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		    String aoi = sw.toString();
+		    
+	        System.out.println("coords: " + aoi);
+	        
+        	
 			HttpPost httppost = new HttpPost("https://api.astrodigital.com/v2.0/tasks");
 			httppost.addHeader("Authorization", "Token 51fcf1fd2c063aaf3ac22029adf505c2d56e681c");
 			
 			String strParams = "{\"name\": \"" + name +"\","
 					+ "\"products\": [{\"product\": \"ndvi_image\",\"actions\": [\"mapbox\",\"raw\"]}],"
 					+ "\"query\": {\"date_from\": \"2015-11-01\",\"date_to\": \"2016-01-01\","
-					+ "\"aoi\": {\"type\": \"Polygon\","
-					+ "\"coordinates\": "
-					+ strCoords
-					+ "}}}";
+					+ "\"aoi\": " + aoi
+					+ "}}";
 			System.out.println(strParams);
 
 			
@@ -102,8 +117,10 @@ public class PostTask implements Runnable {
                 }
 
 	        };
+	        
     	            
     	    String responseBody = httpclient.execute(httppost, responseHandler);
+    	    
     	    
     	    
 		} catch (ClientProtocolException e) {

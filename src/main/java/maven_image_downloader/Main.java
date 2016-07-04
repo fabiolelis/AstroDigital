@@ -28,13 +28,28 @@ public class Main {
 				t1.start();
 				t1.join();
 				List<String> scenesIDs = scenes.getScenesIds();
+				List<String> rawsUrls = scenes.getRawsUrls();
 				
-				GetPictures pics = new GetPictures();
-				pics.setScenesIds(scenesIDs);
-				pics.setTaskId(task_id);
-				Thread t2 = new Thread(pics);
-				t2.start();
-				t2.join();
+				scenesIDs.clear();
+				rawsUrls.add("http://storage.googleapis.com/earthengine-public/landsat/L8/099/066/LC80990662016021LGN00.tar.bz");
+				
+				if(scenesIDs.size() > 0){
+					GetPictures pics = new GetPictures();
+					pics.setScenesIds(scenesIDs);	
+					pics.setTaskId(task_id);
+					Thread t2 = new Thread(pics);
+					t2.start();
+					t2.join();
+				}
+				
+				if(rawsUrls.size() > 0){
+					GetRaws getRaws = new GetRaws();
+					getRaws.setRawsUrls(rawsUrls);	
+					getRaws.setTaskId(task_id);
+					Thread t2 = new Thread(getRaws);
+					t2.start();
+					t2.join();
+				}
 				
 //				List<String> picsStr = pics.getPics();
 				System.out.println("Done");
