@@ -62,7 +62,7 @@ public class PostTask implements Runnable {
         	
 			GeometryJSON g = new GeometryJSON();		
 			
-			//Geometry geom = g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
+			//Geometry geom= g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
 			Geometry geom = g.read(result.toString());
 			
 			
