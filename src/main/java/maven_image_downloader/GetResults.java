@@ -79,7 +79,9 @@ public class GetResults implements Runnable {
                     	    		rawsUrls.add(raw_url); 
 
                     	    	}
-                        	    
+                    	    	else{
+                    	    		System.out.println("Unexpected response format");
+                    	    	}
                     	    }
                     	    
                     	}

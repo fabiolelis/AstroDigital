@@ -11,7 +11,7 @@ public class Main {
 			
 			/*args: module (image/task), taskid/taskname, null/jsonfilename
 			 * ex1 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar image 8456
-			 * ex2 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar task newtaskname /Users/fabiolelis/Desktop/Space/geometry.json
+			 * ex2 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar task newtaskname 
 			 */
 			
 			if(args[0] == null || args[1] == null) throw new Exception("Irregular args");
@@ -55,14 +55,11 @@ public class Main {
 				System.out.println("Done");
 			}
 			else{
-				if(args[2] == null) throw new Exception("Irregular args");
 				
 				System.out.println("To post");
 				PostTask posttask = new PostTask();
 				
-				posttask.setName(args[1].toString());
-				posttask.setFilepath(args[2].toString());
-				
+				posttask.setName(args[1].toString());				
 				
 				Thread t3 = new Thread(posttask);
 				t3.start();

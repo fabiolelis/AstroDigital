@@ -49,7 +49,7 @@ public class PostTask implements Runnable {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		
 		try {
-			/*
+			filepath = "/Users/fabiolelis/Desktop/Space/geometry2.json";
 			BufferedReader br = new BufferedReader(new FileReader(filepath));
         	StringBuffer result = new StringBuffer();
         	String line = "";
@@ -59,9 +59,12 @@ public class PostTask implements Runnable {
             
         	System.out.println("result: " + result);
         	JSONObject polygon = new JSONObject(result.toString());
-        	*/
-			GeometryJSON g = new GeometryJSON();			
-			Geometry geom = g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
+        	
+			GeometryJSON g = new GeometryJSON();		
+			
+			//Geometry geom = g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
+			Geometry geom = g.read(result.toString());
+			
 			
 		    System.out.println(geom);
 
@@ -71,10 +74,10 @@ public class PostTask implements Runnable {
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
-		    String aoi = sw.toString();
+		    String aoi = result.toString();//sw.toString();
 		    
-	        System.out.println("coords: " + aoi);
-	        
+	        System.out.println("geometry: " + aoi);
+
         	
 			HttpPost httppost = new HttpPost("https://api.astrodigital.com/v2.0/tasks");
 			httppost.addHeader("Authorization", "Token 51fcf1fd2c063aaf3ac22029adf505c2d56e681c");
