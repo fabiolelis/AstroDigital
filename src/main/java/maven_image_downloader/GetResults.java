@@ -74,7 +74,7 @@ public class GetResults implements Runnable {
                             	    }
                             	  //  System.out.println(scene);
                     	    	}
-                    	    	else if(arr.getJSONObject(i).getJSONObject("value") != null){
+                    	    	if(arr.getJSONObject(i).getJSONObject("value") != null && arr.getJSONObject(i).getJSONObject("value") != null && arr.getJSONObject(i).getJSONObject("value").getString("raw_image_url") != null){
                     	    		String raw_url = arr.getJSONObject(i).getJSONObject("value").getString("raw_image_url");
                     	    		rawsUrls.add(raw_url); 
 

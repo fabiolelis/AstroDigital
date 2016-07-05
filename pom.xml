@@ -28,9 +28,9 @@
 			<version>${geotools.version}</version>
 		</dependency>
 		<dependency>
-		  	<groupId>org.geotools</groupId>
-		  	<artifactId>gt-geojson</artifactId>
-		  	<version>${geotools.version}</version>
+    		<groupId>org.geotools</groupId>
+    		<artifactId>gt-geojson</artifactId>
+    		<version>2.7.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
@@ -45,6 +45,7 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.2</version>
 		</dependency>
+		
 		
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
 		<dependency>
@@ -86,25 +87,41 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
-			   <groupId>org.apache.maven.plugins</groupId>
-			   <artifactId>maven-jar-plugin</artifactId>
-			   <version>2.4</version>
-			   <configuration>
-			     <archive>
-			       <manifest>
-
-			         <mainClass>maven_image_downloader.Main</mainClass>
-			        
-			       </manifest>
-			     </archive>
-			   </configuration>
-			 </plugin>
+			   	<groupId>org.apache.maven.plugins</groupId>
+			   	<artifactId>maven-jar-plugin</artifactId>
+			   	<version>2.4</version>
+			   	<configuration>
+					<archive>
+				    	<manifest>
+				    		<addClasspath>true</addClasspath>
+                        	<classpathPrefix>lib/</classpathPrefix>
+				         	<mainClass>maven_image_downloader.Main</mainClass>
+				       	</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+	           <groupId>org.apache.maven.plugins</groupId>
+	           <artifactId>maven-dependency-plugin</artifactId>
+	           <executions>
+	               <execution>
+	                   <phase>install</phase>
+	                   <goals>
+	                       <goal>copy-dependencies</goal>
+	                   </goals>
+	                   <configuration>
+	                       <outputDirectory>${project.build.directory}/lib</outputDirectory>
+	                   </configuration>
+	               </execution>
+	           </executions>
+			</plugin>
 		</plugins>
 	</build>
 

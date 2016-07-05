@@ -27,6 +27,8 @@ public class GetRaws implements Runnable {
 	private volatile List<String> rawsUrls = new ArrayList<String>();
 	private volatile List<String> pics = new ArrayList<String>();
 	private volatile String task_id;
+	private volatile String imagesFolder;
+
 	
 	public void setRawsUrls(List<String> rawsUrls){
 		this.rawsUrls = rawsUrls;
@@ -37,6 +39,9 @@ public class GetRaws implements Runnable {
 	}
 	public void setTaskId(String task_id){
 		this.task_id = task_id;
+	}
+	public void setImagesFolder(String imagesFolder){
+		this.imagesFolder = imagesFolder;
 	}
 	
 	
@@ -49,20 +54,20 @@ public class GetRaws implements Runnable {
 			for(String strurl : rawsUrls){
 
 				
-            	File fdir = new File("/Users/fabiolelis/Desktop/space_images/"+task_id);
+            	File fdir = new File(imagesFolder+task_id);
         		if(!fdir.exists() && !fdir.isDirectory()) {
         			fdir.mkdir();
         		}
         		String spliturl[] = strurl.split("/");
         		String filename = spliturl[spliturl.length - 1];
-        		File fileoutput = new File("/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+filename);
+        		File fileoutput = new File(imagesFolder+task_id+"/"+filename);
 				
 				URL url = new URL(strurl);
             	InputStream in = new BufferedInputStream(url.openStream());
             	FileOutputStream out = new FileOutputStream(fileoutput);
             	byte[] buf = new byte[1024];
             	int n = 0;
-            	System.out.println("Saving in " + "/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+filename);
+            	System.out.println("Saving in " + imagesFolder +task_id+"/"+filename);
             	while (-1!=(n=in.read(buf)))
             	{
             	   out.write(buf, 0, n);
@@ -73,7 +78,7 @@ public class GetRaws implements Runnable {
 			
         		
         		System.out.println("Uncompressing raw...");
-            	File fdest = new File("/Users/fabiolelis/Desktop/space_images/"+ task_id);
+            	File fdest = new File(imagesFolder+ task_id);
 
             	uncompressTarGZ(fileoutput, fdest);
         		System.out.println("Done");

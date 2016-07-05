@@ -1,5 +1,34 @@
 Manifest-Version: 1.0
 Built-By: fabiolelis
+Class-Path: lib/gt-shapefile-15-20160630.175211-86.jar lib/gt-data-15-
+ 20160630.175209-86.jar lib/jdom-1.1.3.jar lib/jai_core-1.1.3.jar lib/
+ gt-swing-15-20160630.175432-82.jar lib/gt-referencing-15-20160630.175
+ 137-86.jar lib/core-0.26.jar lib/commons-pool-1.5.4.jar lib/gt-metada
+ ta-15-20160630.175134-86.jar lib/gt-opengis-15-20160630.175128-86.jar
+  lib/jsr-275-1.0-beta-2.jar lib/jgridshift-1.0.jar lib/GeographicLib-
+ Java-1.44.jar lib/gt-render-15-20160630.175227-86.jar lib/gt-coverage
+ -15-20160630.175212-86.jar lib/jai_imageio-1.1.jar lib/imageio-ext-ti
+ ff-1.1.15.jar lib/imageio-ext-utilities-1.1.15.jar lib/imageio-ext-ge
+ ocore-1.1.15.jar lib/imageio-ext-streams-1.1.15.jar lib/jai_codec-1.1
+ .3.jar lib/jt-zonalstats-1.4.0.jar lib/jt-utils-1.4.0.jar lib/jt-affi
+ ne-1.0.9.jar lib/jt-iterators-1.0.9.jar lib/jt-utilities-1.0.9.jar li
+ b/jt-scale-1.0.9.jar lib/jt-translate-1.0.9.jar lib/jt-algebra-1.0.9.
+ jar lib/jt-bandmerge-1.0.9.jar lib/jt-bandselect-1.0.9.jar lib/jt-ban
+ dcombine-1.0.9.jar lib/jt-border-1.0.9.jar lib/jt-buffer-1.0.9.jar li
+ b/jt-crop-1.0.9.jar lib/jt-lookup-1.0.9.jar lib/jt-mosaic-1.0.9.jar l
+ ib/jt-nullop-1.0.9.jar lib/jt-rescale-1.0.9.jar lib/jt-stats-1.0.9.ja
+ r lib/guava-17.0.jar lib/jt-warp-1.0.9.jar lib/jt-zonal-1.0.9.jar lib
+ /jt-binarize-1.0.9.jar lib/jt-format-1.0.9.jar lib/jt-colorconvert-1.
+ 0.9.jar lib/jt-errordiffusion-1.0.9.jar lib/jt-orderdither-1.0.9.jar 
+ lib/jt-colorindexer-1.0.9.jar lib/jt-imagefunction-1.0.9.jar lib/jt-p
+ iecewise-1.0.9.jar lib/jt-classifier-1.0.9.jar lib/jt-rlookup-1.0.9.j
+ ar lib/jt-vectorbin-1.0.9.jar lib/commons-io-2.1.jar lib/gt-cql-15-20
+ 160630.175207-86.jar lib/miglayout-3.7-swing.jar lib/gt-geojson-2.7.0
+ .jar lib/gt-main-2.7.0.jar lib/gt-api-2.7.0.jar lib/jts-1.11.jar lib/
+ xercesImpl-2.4.0.jar lib/jdom-1.0.jar lib/json-simple-1.1.jar lib/jso
+ n-20160212.jar lib/httpclient-4.5.2.jar lib/commons-logging-1.2.jar l
+ ib/commons-codec-1.9.jar lib/httpcore-4.4.5.jar lib/commons-compress-
+ 1.4.jar lib/xz-1.0.jar
 Build-Jdk: 1.8.0_65
 Created-By: Maven Integration for Eclipse
 Main-Class: maven_image_downloader.Main

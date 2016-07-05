@@ -31,6 +31,7 @@ public class GetPictures implements Runnable {
 	private volatile List<String> scenesIDs = new ArrayList<String>();
 	private volatile List<String> pics = new ArrayList<String>();
 	private volatile String task_id;
+	private volatile String imagesFolder;
 	
 	public void setScenesIds(List<String> scenesIDs){
 		this.scenesIDs = scenesIDs;
@@ -41,6 +42,9 @@ public class GetPictures implements Runnable {
 	}
 	public void setTaskId(String task_id){
 		this.task_id = task_id;
+	}
+	public void setImagesFolder(String imagesFolder){
+		this.imagesFolder = imagesFolder;
 	}
 	
 	
@@ -55,7 +59,7 @@ public class GetPictures implements Runnable {
 			for(String sceneID : scenesIDs){
 
     			HttpGet httpget = new HttpGet("https://api.astrodigital.com/v2.0/search?scene_id=" + sceneID);
-    			//httpget.addHeader("Authorization", "Token 51fcf1fd2c063aaf3ac22029adf505c2d56e681c");
+    			
     	        
     	        ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 	
@@ -94,13 +98,13 @@ public class GetPictures implements Runnable {
 	                    	in.close();
 	                    	byte[] bynary = out.toByteArray();
 	                    	
-	                    	File fdir = new File("/Users/fabiolelis/Desktop/space_images/"+task_id);
+	                    	File fdir = new File(imagesFolder+task_id);
                     		if(!fdir.exists() && !fdir.isDirectory()) {
                     			fdir.mkdir();
                     		}
-	                    	File f = new File("/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+sceneID+".png");
+	                    	File f = new File(imagesFolder+task_id+"/"+sceneID+".png");
 	                    	if(!f.exists() && !f.isDirectory()) { 
-	                    		FileOutputStream fos = new FileOutputStream("/Users/fabiolelis/Desktop/space_images/"+task_id+"/"+sceneID+".png");
+	                    		FileOutputStream fos = new FileOutputStream(imagesFolder+task_id+"/"+sceneID+".png");
 		                    	fos.write(bynary);
 		                    	fos.close();
 		                    	System.out.println("Saved " + sceneID);

@@ -60,11 +60,11 @@ public class PostTask implements Runnable {
         	System.out.println("result: " + result);
         	JSONObject polygon = new JSONObject(result.toString());
         	
-			GeometryJSON g = new GeometryJSON();		
-			
-			//Geometry geom= g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
+        	//Geometry geom = g.read("{\"type\": \"Polygon\",\"coordinates\": [[[100.0, 0.0],[101.0, 0.0],[101.0, 1.0],[100.0, 1.0],[100.0, 0.0]]]}");
+        	
+        	
+			GeometryJSON g = new GeometryJSON(15);		
 			Geometry geom = g.read(result.toString());
-			
 			
 		    System.out.println(geom);
 
@@ -74,7 +74,7 @@ public class PostTask implements Runnable {
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
-		    String aoi = result.toString();//sw.toString();
+		    String aoi = sw.toString();
 		    
 	        System.out.println("geometry: " + aoi);
 

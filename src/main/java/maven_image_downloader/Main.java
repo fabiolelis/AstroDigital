@@ -2,6 +2,11 @@ package maven_image_downloader;
 
 
 import java.util.List;
+import maven_image_downloader.PostTask;
+import maven_image_downloader.GetRaws;
+import maven_image_downloader.GetPictures;
+import maven_image_downloader.GetResults;
+
 
 public class Main {
 
@@ -10,7 +15,7 @@ public class Main {
 		try{
 			
 			/*args: module (image/task), taskid/taskname, null/jsonfilename
-			 * ex1 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar image 8456
+			 * ex1 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar image 8456 imagesfolder
 			 * ex2 java -jar maven_image_downloader-0.0.1-SNAPSHOT.jar task newtaskname 
 			 */
 			
@@ -19,7 +24,10 @@ public class Main {
 			String answer = args[0].toString();
 			
 			if(answer.toLowerCase().equals("image")){
-				
+				String imagesFolder = "/Users/fabiolelis/Desktop/space_images/" ;
+				if(args.length > 2){
+					imagesFolder = args[2];
+				}
 				String task_id = args[1].toString(); 
 				System.out.println("Fetching images for task " + task_id);
 				GetResults scenes = new GetResults();  
@@ -30,13 +38,14 @@ public class Main {
 				List<String> scenesIDs = scenes.getScenesIds();
 				List<String> rawsUrls = scenes.getRawsUrls();
 				
-				scenesIDs.clear();
-				rawsUrls.add("http://storage.googleapis.com/earthengine-public/landsat/L8/099/066/LC80990662016021LGN00.tar.bz");
+				//scenesIDs.clear();
+				//rawsUrls.add("http://storage.googleapis.com/earthengine-public/landsat/L8/099/066/LC80990662016021LGN00.tar.bz");
 				
 				if(scenesIDs.size() > 0){
 					GetPictures pics = new GetPictures();
 					pics.setScenesIds(scenesIDs);	
 					pics.setTaskId(task_id);
+					pics.setImagesFolder(imagesFolder);
 					Thread t2 = new Thread(pics);
 					t2.start();
 					t2.join();
@@ -46,6 +55,7 @@ public class Main {
 					GetRaws getRaws = new GetRaws();
 					getRaws.setRawsUrls(rawsUrls);	
 					getRaws.setTaskId(task_id);
+					getRaws.setImagesFolder(imagesFolder);
 					Thread t2 = new Thread(getRaws);
 					t2.start();
 					t2.join();

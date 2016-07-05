@@ -1,5 +1,6 @@
 maven_image_downloader/GetResults.class
 maven_image_downloader/Main.class
+maven_image_downloader/GetRaws.class
 maven_image_downloader/GetResults$1.class
 maven_image_downloader/PostTask$1.class
 maven_image_downloader/GetPictures$1.class
